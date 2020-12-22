@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+	    <meta charset="utf-8" />
+	    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>sApi misc demos</title>
+		<script src="../../sApi.min.js"></script>
+	</head>
+	<body>
+		<header>
+			<h1>sApi misc demos</h1>
+		</header>
+		<main>
+			<article>
+				<p>
+					This demostrates working with selectors, .ready(), .require{}, .ajax() and custom classes on runtime.
+			</article>
+			<button class="cssLoader" data-css="misc.css">Load demo CSS with $s.require.css</button>
+			<button class="ajaxLoader" data-ajax="misc_ajax.xml">Load misc_ajax.xml with $s.ajax()</button>
+		</main>
+		<hr>
+		<script>
+			$s.ready(function() 
+			{
+				$s.require.js("../../tools/s_frontendLogger.js", function() 
+				{
+					$s.frontendLogger.log("document ready (and logger loaded)");
+
+					$s.require.js("../../tools/s_localStorage.js", function() 
+					{
+						$s.frontendLogger.log("finished loading localstorage.js");
+					});
+
+					$s.require.js("../../tools/nodelist_ie_polyfill.js", function() 
+					{
+						$s.frontendLogger.log("finished loading nodelist_ie_polyfill.js");
+					});
+
+					$s.require.js("misc.js", function() 
+					{
+						$s.frontendLogger.log("finished loading misc.js");
+					});
+				});
+			});
+		</script>
+	</body>
+</html>
