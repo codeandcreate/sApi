@@ -10,7 +10,7 @@ A minimalistic javascript api: The core is a little javascript that can extend i
 ## Examples
 
 - extend() - the core functionality
-- 
+
 ``` js
 $s.extend({
 	_objectReady: false, //optional if a function wants to check if init was called...
