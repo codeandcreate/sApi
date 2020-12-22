@@ -4,7 +4,7 @@ A minimalistic javascript api: The core is a little javascript that can extend i
 ## Changes
 
 |&nbsp;&nbsp;&nbsp;Version&nbsp;&nbsp;&nbsp;| Info |
-|---|---|---|
+|---|---|
 | 202012.01 | First public version of sApi, based on smdQS/smdApi from Schwäbisch Media Digital |
 
 ## Examples
