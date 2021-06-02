@@ -35,10 +35,6 @@ $s.extend({
 				return false;
 			}
 
-			if (typeof window.sApi_jsHost !== "undefined" && source.indexOf("://") === -1) {
-				source = window.sApi_jsHost + source;
-			}
-
 			var idForLoaderTag  = "sRequire-" + btoa(source);
 			var existingElement = null;
 			if (this._runningRequireOperationsForId.indexOf(idForLoaderTag) === -1) {
@@ -89,7 +85,7 @@ $s.extend({
 					}
 				}
 
-				if (ref === null || typeof ref === "undefined") {
+				if (ref === null || ref === undefined) {
 					window.document.head.appendChild(newElement);
 				} else {
 					ref.parentNode.insertBefore(newElement, ref);

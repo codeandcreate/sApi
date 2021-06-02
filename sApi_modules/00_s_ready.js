@@ -9,7 +9,7 @@ $s.extend({
 	_docReadyEventHandlersInstalled : false,
 
 	/**
-	 * just a function...
+	 * Calls callback if document is ready
 	 *
 	 * @typedef $s.ready
 	 * @param callback   that will be fired if document is ready

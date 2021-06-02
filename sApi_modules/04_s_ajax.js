@@ -15,7 +15,7 @@ $s.extend({
 	 */
 	ajax: function (urlOrObject, callback, data, method)
 	{
-		var errorCallback, headers, withCredentials, returnObjectFromJson;
+		var errorCallback, headers, withCredentials;
 
 		if (typeof urlOrObject === "object") {
 			data            = urlOrObject.data || "";
@@ -24,7 +24,6 @@ $s.extend({
 			errorCallback   = urlOrObject.errorCallback || undefined;
 			headers         = urlOrObject.headers || {};
 			withCredentials = urlOrObject.withCredentials || undefined;
-			returnObjectFromJson      = urlOrObject.json || false;
 
 			urlOrObject = urlOrObject.url || undefined;
 		}

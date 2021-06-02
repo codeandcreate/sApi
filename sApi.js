@@ -1,7 +1,7 @@
 /**
  * $s-API
  *
- * @version 202012.01
+ * @version 202106.01
  */
 (function (w, d, pvn)
 {
@@ -18,7 +18,7 @@
 		_includeModulesPlaceHolder: {},
 
 		//to check which version of the api is running
-		version: 202012.01,
+		version: 202106.01,
 
 		/**
 		 * extends smdApi with object
@@ -56,6 +56,26 @@
 		},
 
 		/**
+		 * Workaround if body not fully loaded...
+		 *
+		 * @param event
+		 * @returns {boolean}
+		 * @private
+		 */
+		 _dispatchReadyEvent: function (event)
+		{
+			if (document.body !== null) {
+				document.body.dispatchEvent(event);
+			} else {
+				$s.ready(function() {
+					$s._dispatchReadyEvent(event);
+				});
+			}
+
+			return true;
+		},
+
+		/**
 		 * Initializes an api on $s or on a subobject of $s
 		 *
 		 * @param api
@@ -78,7 +98,7 @@
 				{
 					_apiToSetReady._objectReady = true;
 					let event                 = new CustomEvent("$s." + _completeNewApiName.join(".") + "::ready");
-					document.body.dispatchEvent(event);
+					$s._dispatchReadyEvent(event);
 
 					if (typeof _apiToSetReady === "object" && _apiToSetReady.constructor !== Array && Object.keys(_apiToSetReady).length > 0) {
 						for (let i in _apiToSetReady) {
@@ -88,8 +108,8 @@
 								/*
 									timing fuckup in javascript ?! needs to be debugged;
 
-									if there is no setTimeout here, subobject
-									could not call $s.onApiReady inside the init() function.
+									if there is no setTimeout here, subobject like smd.ui.loadMoreDatasets
+									could not call smd.onApiReady or smd.userSettings.exec inside the init() function.
 								 */
 								setTimeout(function() { $s._isapi(_apiToSetReady, i, _completeNewApiName);},1);
 							}
@@ -116,7 +136,6 @@
 						_makeAutoObjectReady = false;
 					}
 				}
-
 
 				// CustomEvents can only be dispatched if the dom is ready.
 				// So if there is _readyFunction in the $s-Object,
@@ -190,12 +209,6 @@
 	 */
 	$s.ready(function()
 	{
-		for (let i in $s) {
-			if (typeof $s[i] === "object" && i !== "_rF") {
-				$s._isapi($s, i, [i]);
-			}
-		}
-
 		for (let i in $s._rF) {
 			if (!isNaN(i) && typeof $s._rF[i] === "function") {
 				$s._rF[i]();
