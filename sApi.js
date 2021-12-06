@@ -18,7 +18,7 @@
 		_includeModulesPlaceHolder: {},
 
 		//to check which version of the api is running
-		version: 202106.01,
+		version: 202112.01,
 
 		/**
 		 * extends smdApi with object
@@ -204,8 +204,9 @@
 			_onApiReady($s, splittedApiName, apiName);
 		}
 	};
+
 	/**
-	 * Initializes all subobjects of $s.
+	 * Initializes all ready functions of $s' subobjects.
 	 */
 	$s.ready(function()
 	{
@@ -216,6 +217,15 @@
 		}
 		delete($s._rF);
 	});
+
+	/**
+	 * Prepares all subobjects of $s that are bundled via sApi_modules
+	 */
+	for (let i in $s) {
+		if (typeof $s[i] === "object" && i !== "_rF") {
+			$s._isapi($s, i, [i]);
+		}
+	}
 
 	// default name is $s
 	w[pvn || "$s"] = $s;

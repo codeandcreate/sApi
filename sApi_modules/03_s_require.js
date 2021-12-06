@@ -142,6 +142,14 @@ $s.extend({
 		 */
 		object: function (objectName, callback, useCustomEventListener)
 		{
+			try {
+				let re = new RegExp("^[a-zA-Z0-9_]+$");
+				if (re.exec(objectName) !== null && typeof eval(objectName) === "object") {
+					callback();
+					return;
+				}
+			} catch (e) {}
+			
 			useCustomEventListener = useCustomEventListener || false;
 			if (objectName in window) {
 				callback();
