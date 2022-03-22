@@ -1,7 +1,7 @@
 /**
  * $s-API
  *
- * @version 202106.01
+ * @version 202203.01
  */
 (function (w, d, pvn)
 {
@@ -18,7 +18,7 @@
 		_includeModulesPlaceHolder: {},
 
 		//to check which version of the api is running
-		version: 202112.01,
+		version: 202203.01,
 
 		/**
 		 * extends smdApi with object
@@ -219,7 +219,7 @@
 	});
 
 	/**
-	 * Prepares all subobjects of $s that are bundled via sApi_modules
+	 * Initializes all subobjects of $s.
 	 */
 	for (let i in $s) {
 		if (typeof $s[i] === "object" && i !== "_rF") {

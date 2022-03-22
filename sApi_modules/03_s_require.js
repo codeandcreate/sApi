@@ -4,6 +4,7 @@
 $s.extend({
 	/**
 	 * @typedef $s.require
+	 * @typedef smd.require
 	 */
 	require: {
 		_runningRequireOperationsForId: [],
@@ -142,6 +143,9 @@ $s.extend({
 		 */
 		object: function (objectName, callback, useCustomEventListener)
 		{
+			/**
+			 * if an object is defined outside of window-context, we must check it with eval...
+			 */
 			try {
 				let re = new RegExp("^[a-zA-Z0-9_]+$");
 				if (re.exec(objectName) !== null && typeof eval(objectName) === "object") {
@@ -149,7 +153,7 @@ $s.extend({
 					return;
 				}
 			} catch (e) {}
-			
+
 			useCustomEventListener = useCustomEventListener || false;
 			if (objectName in window) {
 				callback();

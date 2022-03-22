@@ -1,15 +1,14 @@
 $s.extend({
 	/**
 	 * Support object dom handling
-	 * Needed for example for EuGdpr CMPs if a javascript block should be run/activated in place
 	 *
-	 * @typedef $s.dom
+	 * @typedef smd.dom
 	 */
 	dom: {
 		/**
-		 * Wrapper for $.dom.scriptInsteadOf which adds a script to the dom
+		 * Wrapper for $s.dom.scriptInsteadOf which adds a script to the dom
 		 *
-		 * @typedef $.dom.mixedNodes
+		 * @typedef $s.dom.mixedNodes
 		 * @param base64Data
 		 */
 		mixedNodes      : function (base64Data)
@@ -17,9 +16,9 @@ $s.extend({
 			this.elementInsteadOf(document.currentScript, undefined, {"innerHTML": atob(base64Data)});
 		},
 		/**
-		 * Wrapper for $.dom.scriptInsteadOf which adds a iFrame to the dom
+		 * Wrapper for $s.dom.scriptInsteadOf which adds a iFrame to the dom
 		 *
-		 * @typedef $.dom.iframe
+		 * @typedef $s.dom.iframe
 		 * @param url
 		 * @param attributes
 		 */
@@ -31,9 +30,9 @@ $s.extend({
 			this.elementInsteadOf(document.currentScript, "iframe", attributes);
 		},
 		/**
-		 * Wrapper for $.dom.scriptInsteadOf which adds a img to the dom
+		 * Wrapper for $s.dom.scriptInsteadOf which adds a img to the dom
 		 *
-		 * @typedef $.dom.iframe
+		 * @typedef $s.dom.iframe
 		 * @param url
 		 * @param attributes
 		 */
@@ -45,9 +44,9 @@ $s.extend({
 			this.elementInsteadOf(document.currentScript, "img", attributes);
 		},
 		/**
-		 * Wrapper for $.dom.scriptInsteadOf which adds a embed to the dom
+		 * Wrapper for $s.dom.scriptInsteadOf which adds a embed to the dom
 		 *
-		 * @typedef $.dom.iframe
+		 * @typedef $s.dom.iframe
 		 * @param url
 		 * @param attributes
 		 */
@@ -59,9 +58,9 @@ $s.extend({
 			this.elementInsteadOf(document.currentScript, "embed", attributes);
 		},
 		/**
-		 * Wrapper for $.dom.scriptInsteadOf which uses document.currentScript for "that", automatically.
+		 * Wrapper for $s.dom.scriptInsteadOf which uses document.currentScript for "that", automatically.
 		 *
-		 * @typedef $.dom.script
+		 * @typedef $s.dom.script
 		 */
 		script          : function (urlOrCode, attributes)
 		{
@@ -79,7 +78,7 @@ $s.extend({
 		 * Replaces a javascript tag (that) with another
 		 * based on urlOrCode and optional attributes for the new tag
 		 *
-		 * @typedef $.dom.scriptInsteadOf
+		 * @typedef $s.dom.scriptInsteadOf
 		 */
 		elementInsteadOf: function (that, newElementType, attributes)
 		{
@@ -113,7 +112,7 @@ $s.extend({
 											}
 										}
 										scriptAttributes.textContent = defunctScript.textContent;
-										$s.dom.elementInsteadOf(defunctScript, "script", scriptAttributes);
+										smd.dom.elementInsteadOf(defunctScript, "script", scriptAttributes);
 									});
 								}
 								break;
@@ -139,6 +138,50 @@ $s.extend({
 				// no node to replace? just add to the body
 				document.body.appendChild(nE);
 			}
+		},
+
+		/**
+		 * @typedef $s.dom.getParentOfType
+		 * @param element
+		 * @param parentType
+		 * @returns {*}
+		 */
+		getParentOfType: function (element, parentType)
+		{
+			var parent = element.parentNode;
+			while (parent.nodeName != parentType) {
+				parent = parent.parentNode;
+			}
+			return parent;
+		},
+
+		/**
+		 * @typedef $s.dom.getParentOfClass
+		 * @param element
+		 * @param parentClass
+		 * @returns {*}
+		 */
+		getParentOfClass: function (element, parentClass)
+		{
+			var parent = element.parentNode;
+			while (!parent.classList.contains(parentClass)) {
+				parent = parent.parentNode;
+			}
+			return parent;
+		},
+
+		/**
+		 * @typedef $s.dom.getNextSibling
+		 * @param element
+		 * @returns {HTMLElement}
+		 */
+		getNextSibling: function (element)
+		{
+			var sibling = element.nextSibling;
+			while (!(sibling instanceof HTMLElement)) {
+				sibling = sibling.nextSibling;
+			}
+			return sibling;
 		},
 	}
 });

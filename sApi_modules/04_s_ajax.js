@@ -1,5 +1,5 @@
 /**
- * $s.ajax() as sApi Extention
+ * $s.ajax() as smdApi Extention
  *
  */
 $s.extend({
@@ -18,12 +18,12 @@ $s.extend({
 		var errorCallback, headers, withCredentials;
 
 		if (typeof urlOrObject === "object") {
-			data            = urlOrObject.data || "";
-			method          = urlOrObject.method || "GET";
-			callback        = urlOrObject.callback || undefined;
-			errorCallback   = urlOrObject.errorCallback || undefined;
-			headers         = urlOrObject.headers || {};
-			withCredentials = urlOrObject.withCredentials || undefined;
+			data            		= urlOrObject.data || "";
+			method          		= urlOrObject.method || "GET";
+			callback        		= urlOrObject.callback || undefined;
+			errorCallback   		= urlOrObject.errorCallback || undefined;
+			headers         		= urlOrObject.headers || {};
+			withCredentials 		= urlOrObject.withCredentials || undefined;
 
 			urlOrObject = urlOrObject.url || undefined;
 		}
