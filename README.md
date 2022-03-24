@@ -1,3 +1,5 @@
+__! Deprecated - further development will be done on https://codeberg.org/codeandcreate/sApi !__
+
 # sApi - Small Javascript Api
 A minimalistic javascript api: The core is a little javascript that can extend itself with other objects or functions by calling ```$s.extend()```. If a extention should be packed within the minifing, it must be just placed into sApi_modules.
 
